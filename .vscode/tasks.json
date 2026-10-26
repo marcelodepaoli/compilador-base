@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "options": { "cwd": "${workspaceFolder}" },
+  "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+  "tasks": [
+    {
+      "label": "Compilar Gramática (JavaCC)",
+      "type": "shell",
+      "command": "scripts\\build.bat gramatica",
+      "problemMatcher": []
+    },
+    {
+      "label": "Compilar Java",
+      "type": "shell",
+      "command": "scripts\\build.bat compilar",
+      "problemMatcher": "$javac"
+    },
+    {
+      "label": "Executar Parser",
+      "type": "shell",
+      "command": "scripts\\build.bat executar",
+      "problemMatcher": []
+    },
+    {
+      "label": "Build & Run",
+      "dependsOn": ["Compilar Gramática (JavaCC)", "Compilar Java", "Executar Parser"],
+      "dependsOrder": "sequence",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "java.project.sourcePaths": ["src", "build/gen"],
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "files.exclude": { "build/sources.txt": true }
+}

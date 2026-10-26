@@ -1,0 +1,39 @@
+/*
+ * EBNF:
+ *   exp   -> termo ( ("+" | "-") termo )*
+ *   termo -> fator ( "*" fator )*
+ *   fator -> "(" exp ")" | numero
+ */
+options { STATIC = false; }
+
+PARSER_BEGIN(Calc)
+public class Calc { }
+PARSER_END(Calc)
+
+SKIP : { " " | "\t" | "\r" | "\n" }
+
+TOKEN : {
+  <PLUS: "+"> | <MINUS: "-"> | <TIMES: "*">
+| <LP: "("> | <RP: ")">
+| <NUM: (["0"-"9"])+>
+}
+
+int Input() : { int v; } { v = Exp() <EOF> { return v; } }
+
+int Exp() : { int v, r; }
+{
+  v = Termo() ( <PLUS> r = Termo() { v += r; } | <MINUS> r = Termo() { v -= r; } )*
+  { return v; }
+}
+
+int Termo() : { int v, r; }
+{
+  v = Fator() ( <TIMES> r = Fator() { v *= r; } )*
+  { return v; }
+}
+
+int Fator() : { int v; }
+{
+    <LP> v = Exp() <RP> { return v; }
+  | <NUM> { return Integer.parseInt(token.image); }
+}
