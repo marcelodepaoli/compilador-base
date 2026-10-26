@@ -13,7 +13,17 @@
       "label": "Compilar Java",
       "type": "shell",
       "command": "scripts\\build.bat compilar",
-      "problemMatcher": "$javac"
+      "problemMatcher": {
+        "owner": "javac",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+\\.java):(\\d+):\\s+(error|warning):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "severity": 3,
+          "message": 4
+        }
+      }
     },
     {
       "label": "Executar Parser",
